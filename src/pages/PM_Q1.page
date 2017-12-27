@@ -1,0 +1,48 @@
+<apex:page Controller="accsearchcontroller" > 
+
+    
+    <apex:form rendered="true"> 
+        <apex:outputPanel >
+            <b>Search Records</b><br/>
+            <apex:inputText value="{!searchstring}" label="Input"/> 
+            <apex:commandButton value="Search records" action="{!accountsearch}"/> 
+            <apex:commandButton value="Clear records" action="{!clear}"/> 
+       
+        
+      
+            <apex:pageBlock title="Search Result of Account Records" rendered="{!acc.size!=0}">        
+                <apex:pageblockTable value="{!acc}" var="a"> 
+                    <apex:column value="{!a.name}"/> 
+                    <apex:column value="{!a.id}"/> 
+                </apex:pageBlockTable> 
+            </apex:pageBlock> 
+        </apex:outputPanel>
+        
+        <apex:pageBlock title="Search Result of Contact Records" rendered="{!contobj.size!=0}">
+            <apex:pageBlockTable value="{!contobj}" var="c">
+               <apex:column value="{!c.FirstName}"/>
+                <apex:column value="{!c.LastName}"/>
+            </apex:pageBlockTable>        
+        </apex:pageBlock> 
+        
+        
+        <apex:pageBlock title="Search Result of Opportunity Records" rendered="{!oppobj.size!=0}">
+            <apex:pageBlockTable value="{!oppobj}" var="o">
+               <apex:column value="{!o.Name}"/>               
+            </apex:pageBlockTable>        
+        </apex:pageBlock> 
+        
+         <apex:pageBlock title="Search Result of Lead Records" rendered="{!leadobj.size!=0}">
+            <apex:pageBlockTable value="{!leadobj}" var="l">
+               <apex:column value="{!l.Name}"/>               
+            </apex:pageBlockTable>        
+        </apex:pageBlock> 
+        
+    </apex:form> 
+    
+   
+    
+    
+    
+    
+</apex:page>

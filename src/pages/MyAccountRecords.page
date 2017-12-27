@@ -1,0 +1,87 @@
+<apex:page standardController="Account" extensions="PM_Q5" id="myacclistpage">
+<apex:stylesheet value="{!URLFOR($Resource.EnterKeyAndDeleteContact, 'deletecontact.js')}"/>
+
+  <apex:pageMessages ></apex:pageMessages>
+  
+     <apex:form id="myform"> 
+        <apex:outputPanel id="myacc">
+            <b>Records</b><br/>
+            <apex:commandButton value="Click here to display records" action="{!accountdisplay}"/> 
+            <apex:commandButton value="Clear records" action="{!clear}"/>  
+            <apex:inputText value="{!searchstring}" />  
+            <apex:commandButton value="Search Record" action="{!accountsearch}" onkeypress="return noenter(event)" id="mysearhbutton"/> 
+            <apex:outputText value="{!countOfAccRecords}"/>
+            
+           <span style="float: right;">
+                <apex:repeat value="{!AlphaList}" var="a">
+                  <apex:commandLink value="{!a}" action="{!accountsearchwithAlphabet}" rerender="myacc">
+                     <apex:param value="{!a}" assignTo="{!searchAlphabet}" /> 
+                  </apex:commandLink>
+                  &nbsp;
+                </apex:repeat>
+            </span>
+            
+            <apex:pageBlock title="Result of Account Records" rendered="{!accList.size!=0}">        
+                <apex:pageblockTable value="{!accList}" var="a">            
+                   <apex:column >
+                       <apex:commandLink action="{!displayoppList}" value="{!a.Name}" rerender="myacc">
+                           <apex:param value="{!a.Id}" assignTo="{!accountIdopp}"/>
+                       </apex:commandLink>
+                   </apex:column>                      
+                   <apex:column value="{!a.Phone}"/>
+                   <apex:column value="{!a.BillingCity},{!a.BillingStreet}" />
+                </apex:pageBlockTable> 
+            </apex:pageBlock>          
+            
+            <apex:pageBlock title=" Related List : Opportunity  ">
+                <apex:pageblockTable value="{!accoppList}" var="opp">
+                    <apex:column value="{!opp.Name}"/>
+                </apex:pageblockTable>  
+            </apex:PageBlock>
+     
+          <apex:pageBlock title=" Related List : Contacts" >           
+            <apex:pageblockTable value="{!accconList}" var="con">
+                 <apex:column style="width:50px" > 
+                    <apex:outputLink onclick="remote(this)" html-data-contactid="{!con.Id}" value="#" id="contactId" >Delete</apex:outputLink>
+                 </apex:column>                  
+                 <apex:column value="{!con.Name}" id="contactName"/>
+            </apex:pageblockTable>  
+          </apex:PageBlock>
+     
+        </apex:outputPanel>
+     </apex:form> 
+     
+ 
+     <script>
+     
+    /* function remote(element) {   
+      
+        var contIDToBeDeleted = element.getAttribute("data-contactid");
+        console.log(contIDToBeDeleted );                
+            
+        Visualforce.remoting.Manager.invokeAction (
+           '{!$RemoteAction.PM_Q5.deleteContactRecord}'
+           , contIDToBeDeleted
+           , function (result, event) {
+                if (event.status == true) {
+                    alert('Contact Deleted with contact Id' + contIDToBeDeleted);
+                }
+             }
+         );
+      } */
+      
+     //If hit enter key then respective list should be displayed
+      /*function noenter(e) { 
+            if (window.event) {                   
+                key = window.event.keyCode; //IE              
+            } else {                   
+                key = e.which; //firefox              
+            }  
+                        
+            if (key == 13) {                            
+              accountsearch();
+            }         
+      }    */
+     </script>
+     
+</apex:page>

@@ -1,0 +1,31 @@
+<apex:page standardController="Student__c" extensions="TranslationWorkbenchController" language="{!selectedLang}" sidebar="false" id="p1">    
+   <apex:form >
+    <div >
+        <div style="float:right">
+        <apex:outputPanel >
+        Select Language:
+            <apex:selectList value="{!selectedLang}" size="1" multiselect="false">
+                <apex:selectOptions value="{!AvailableLanguages}" rendered="true"/>
+                <apex:actionSupport action="{!DummyMethod}" event="onchange"  reRender="pb1" />
+            </apex:selectlist>
+             </apex:outputPanel>
+        </div>
+    </div>
+ 
+   
+    <apex:pageBlock title="Student Information" id="pb1">     
+          <BR/><BR/>      
+     
+      {!$Label.Name}:<apex:inputfield value="{!Student__c.Name__c}"/><BR/><BR/>
+        HSC  : <apex:inputfield value="{!Student__c.HSC__c}"/><BR/><BR/>
+        SSC  :<apex:inputfield value="{!Student__c.SSC__c}"/><BR/><BR/>
+      {!$Label.Gender}:<apex:inputfield value="{!Student__c.Gender__c}"/><BR/><BR/>
+      {!$Label.Course_Applying_for}:<apex:inputfield value="{!Student__c.Course_Applying_for__c}"/><BR/><BR/>
+       
+             
+         <apex:commandButton value="save" action="{!save}" ONclick="alert('Your Record ha been saved!' )"/><br/>
+        
+   
+    </apex:pageBlock>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,91 @@
+<apex:page standardController="Opportunity" showHeader="false" renderAs="pdf" cache="true" readOnly="true" >
+<head>
+<style>
+      tr.dataCell{ 
+              background-color:red; 
+              padding:5px;
+      }
+}
+</style>
+</head>
+        <apex:outputText style="font-weight:bold;font-size:35px;float:right;margin:20px;color: #1989AA;" value="INVOICE"/>       
+        
+        <table   border="2px solid black" style="float:right;margin-left:400px;font-size:10px;padding:3px;width:50%; border-collapse: collapse;">
+              <tr style="background-color: #9FC5EE" height="20px">
+                 <td  align="center"> INVOICE </td>
+                 <td  align="center"> DATE </td>
+              </tr>
+               <tr >
+                 <td align="center"> {!Opportunity.OrderNumber__c}</td>
+                 <td align="center"> {!text(day(datevalue(Opportunity.CreatedDate)))&"/"&text(month(datevalue(Opportunity.CreatedDate)))&"/"&text(year(datevalue(Opportunity.CreatedDate)))} </td>
+              </tr> 
+        </table>
+        
+        <apex:pageBlock >
+           <apex:pageBlockSection title="{!$Organization.Name}">
+                <apex:pageBlockSectionItem > {!$Organization.Street} </apex:pageBlockSectionItem><br/>                             
+                <apex:pageBlockSectionItem > {!$Organization.City} , {!$Organization.PostalCode} </apex:pageBlockSectionItem><br/>
+                <apex:pageBlockSectionItem > {!$Organization.Phone} </apex:pageBlockSectionItem>
+           </apex:pageBlockSection> 
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+        
+        <table   border = "2px solid black" 
+                  style = " float : left ; 
+                          font-size : 10px ; 
+                          padding : 3px ;
+                          width : 30% ;
+                          border-collapse: collapse;"
+        >
+              <tr style="background-color: #9FC5EE" >
+                 <td  height="20px" align="left">&nbsp;&nbsp;BILL TO</td>              
+              </tr>
+               
+        </table>
+        <br/><br/><apex:outputText > &nbsp;&nbsp; {!Opportunity.Name} </apex:outputText><br/>
+        <apex:outputText > &nbsp;&nbsp; {!Opportunity.Account.Name} </apex:outputText><br/>
+        <apex:outputText > &nbsp;&nbsp; {!Opportunity.Account.BillingStreet} </apex:outputText><br/>
+        <apex:outputText > &nbsp;&nbsp; {!Opportunity.Account.BillingCity} , {!$Organization.PostalCode} </apex:outputText><br/>
+        <apex:outputText > &nbsp;&nbsp; {!Opportunity.Account.Phone} </apex:outputText><br/><br/>
+             
+             <table   border = "10px solid black" width="100%">
+                  <tr style="background-color: #9FC5EE">
+                     <td  height="20px" width="90%" align="left">&nbsp;&nbsp;&nbsp;DESCRIPTION</td>
+                     <td  height="20px"  width="10%" align="right">AMOUNT</td>              
+                  </tr>    
+                                 
+                 <tr  font-size="10px">                 
+                   <td  width="80%" height="300"> &nbsp;&nbsp;&nbsp;                
+                        <apex:repeat value="{!Opportunity.OpportunityLineItems}" var="oli">
+                           <apex:outputText value="{!oli.Name}" /><br/>  
+                           <apex:outputText value="{!oli.Quantity}" />                                                
+                        </apex:repeat>                           
+                   </td>
+                   
+                   <td>
+                   </td>
+                   
+                                     
+                   <td  width="80%" height="300">              
+                        <apex:repeat value="{!Opportunity.OpportunityLineItems}" var="oli">                       
+                           <apex:outputText value="{!oli.UnitPrice}"  /><br/>
+                        </apex:repeat>                                                                                                 
+                   </td>                           
+                 </tr> 
+                 
+                 <tr>
+                     <td align="center" ><i>Thank you for your buisness</i></td>
+                     <td>                                              
+                           <apex:outputText value="{!Opportunity.Amount}"  />                                                                           
+                     </td>                 
+                 </tr>   
+                 
+                       
+            </table>
+
+        </apex:pageBlock>
+        
+        
+</apex:page>

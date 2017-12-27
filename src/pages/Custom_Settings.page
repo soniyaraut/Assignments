@@ -1,0 +1,18 @@
+<apex:page Controller="ChooseCityandCounry" applyHtmlTag="true" >
+<apex:form >
+      <apex:actionFunction name="rerenderCities" rerender="CitiesSelectList" >
+          <apex:param name="firstParam" assignTo="{!country}" value="" />
+      </apex:actionFunction>
+
+      <apex:outputText >Country</apex:outputText>          
+      <apex:selectList id="country" styleclass="std" size="1" 
+                value="{!selectedCountry}" onChange="rerenderCities(this.value)">
+      <apex:selectOptions value="{!options}"/>
+         </apex:selectList>
+         
+      <apex:outputText >  State/Province</apex:outputText>         
+          <apex:selectList id="CitiesSelectList" styleclass="std" size="1" >
+      <apex:selectOptions value="{!relatedcity}"/>
+      </apex:selectList>
+    </apex:form>
+</apex:page>
