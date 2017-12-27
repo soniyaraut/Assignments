@@ -1,7 +1,12 @@
+/*
+Author: Soniya Raut
+Class for Programming Model 1 Assignments Set 1
+*/
+
 public class PM_1_Set_1 {
 
     public PM_1_Set_1() {
-        System.debug('This is Constructor');
+        System.debug(' This is Constructor ');
     }
 
     // 1. Method which will accept Integer as parameter and determine & print the number is
@@ -18,7 +23,7 @@ public class PM_1_Set_1 {
     // 2.  Method which will accept Integer parameter and build an print array of upto that Integer
     //     parameter
     //     (For example : If your accepts (Integer) 5 as parameter then build array of any
-    //     datatype but array size should be accepted parameter so in this case your array size
+    //     data-type but array size should be accepted parameter so in this case your array size
     //     should be 5     
     public static List<String> generateStringArray1(Integer n) {
         List<String> str = new List<String>();        
@@ -242,9 +247,8 @@ public class PM_1_Set_1 {
 }
 
 
-/*
-3. Create a Account Record with Name =”Eternus”. Create associated contacts.
-Create a Custom field called Contact Count on Account . Query on Contact
-where Account.Name =”Eternus” and count the associated contacts. Update
-the custom field on Accounts with that count.
-*/
+
+//3. Create a Account Record with Name =”Eternus”. Create associated contacts.
+//Create a Custom field called Contact Count on Account . Query on Contact
+//where Account.Name =”Eternus” and count the associated contacts. Update
+//the custom field on Accounts with that count.
